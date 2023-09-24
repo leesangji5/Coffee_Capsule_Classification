@@ -40,15 +40,8 @@ def predict(frame):
         return 'Intenso'
     elif y_pred[0][3] > y_pred[0][0] and y_pred[0][3] > y_pred[0][1] and y_pred[0][3] > y_pred[0][2]:
         return 'Portado'
-    else :
-        return 'None'
 
-a = [predict(img[0]), predict(img[1]), predict(img[2]), predict(img[3])]
-b = [predict(img[4]), predict(img[5]), predict(img[6]), predict(img[7])]
-c = [predict(img[8]), predict(img[9]), predict(img[10]), predict(img[11])]
-d = [predict(img[12]), predict(img[13]), predict(img[14]), predict(img[15])]
-
-print(a)
-print(b)
-print(c)
-print(d)
+print([predict(img[0]), predict(img[1]), predict(img[2]), predict(img[3])])
+print([predict(img[4]), predict(img[5]), predict(img[6]), predict(img[7])])
+print([predict(img[8]), predict(img[9]), predict(img[10]), predict(img[11])])
+print([predict(img[12]), predict(img[13]), predict(img[14]), predict(img[15])])

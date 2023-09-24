@@ -37,9 +37,6 @@ def predict(frame):
     elif y_pred[0][3] > y_pred[0][0] and y_pred[0][3] > y_pred[0][1] and y_pred[0][3] > y_pred[0][2]:
         speak('Portado 150ml, Strong roasting scent, woody scent')
         return 'Portado'
-    else :
-        speak('i can not recognize')
-        return 'None'
 
 pt = time.time()
 while True:
