@@ -49,7 +49,7 @@ while True:
         break
     
     ct = time.time()
-    if ct - pt > 1:
+    if ct - pt > 1 and cv2.waitKey(1) & 0xFF == ord('f'):
         drinkName = predict(frame)
         print(drinkName)
         pt = ct
