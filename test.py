@@ -2,20 +2,27 @@ from tensorflow import keras
 import keras.utils as image
 import numpy as np
 import cv2
-import gtts
-import playsound
-import os
-import time
 
 model = keras.models.load_model('C:/Coffee_Capsule_Classification/coffe_model.h5')
 
-cap = cv2.VideoCapture(0)
-
-def speak(text):
-    tts = gtts.gTTS(text=text, lang='en')
-    tts.save("C:/Coffee_Capsule_Classification/test.mp3")
-    playsound.playsound("C:/Coffee_Capsule_Classification/test.mp3")
-    os.remove("C:/Coffee_Capsule_Classification/test.mp3")
+img = [
+    'C:/Coffee_Capsule_Classification/coffe_images/test/Aarondio/1.jpg',
+    'C:/Coffee_Capsule_Classification/coffe_images/test/Aarondio/2.jpg',
+    'C:/Coffee_Capsule_Classification/coffe_images/test/Aarondio/3.jpg',
+    'C:/Coffee_Capsule_Classification/coffe_images/test/Aarondio/4.jpg',
+    'C:/Coffee_Capsule_Classification/coffe_images/test/Diabolito/1.jpg',
+    'C:/Coffee_Capsule_Classification/coffe_images/test/Diabolito/2.jpg',
+    'C:/Coffee_Capsule_Classification/coffe_images/test/Diabolito/3.jpg',
+    'C:/Coffee_Capsule_Classification/coffe_images/test/Diabolito/4.jpg',
+    'C:/Coffee_Capsule_Classification/coffe_images/test/Intenso/1.jpg',
+    'C:/Coffee_Capsule_Classification/coffe_images/test/Intenso/2.jpg',
+    'C:/Coffee_Capsule_Classification/coffe_images/test/Intenso/3.jpg',
+    'C:/Coffee_Capsule_Classification/coffe_images/test/Intenso/4.jpg',
+    'C:/Coffee_Capsule_Classification/coffe_images/test/Portado/1.jpg',
+    'C:/Coffee_Capsule_Classification/coffe_images/test/Portado/2.jpg',
+    'C:/Coffee_Capsule_Classification/coffe_images/test/Portado/3.jpg',
+    'C:/Coffee_Capsule_Classification/coffe_images/test/Portado/4.jpg'
+]
 
 def predict(frame):
     img = cv2.resize(frame, (150, 150))
@@ -26,33 +33,22 @@ def predict(frame):
     y_pred = model.predict(img_tensor)
 
     if y_pred[0][0] > y_pred[0][1] and y_pred[0][0] > y_pred[0][2] and y_pred[0][0] > y_pred[0][3]:
-        speak('Aarondio 150ml, grain scent, caramel scent')
         return 'Aarondio'
     elif y_pred[0][1] > y_pred[0][0] and y_pred[0][1] > y_pred[0][2] and y_pred[0][1] > y_pred[0][3]:
-        speak('Diabolito 40ml, spicy scent, strong roasting scent')
         return 'Diabolito'
     elif y_pred[0][2] > y_pred[0][0] and y_pred[0][2] > y_pred[0][1] and y_pred[0][2] > y_pred[0][3]:
-        speak('Intenso 230ml, caramel scent, roasting scent')
         return 'Intenso'
     elif y_pred[0][3] > y_pred[0][0] and y_pred[0][3] > y_pred[0][1] and y_pred[0][3] > y_pred[0][2]:
-        speak('Portado 150ml, Strong roasting scent, woody scent')
         return 'Portado'
     else :
         return 'None'
-        #speak('i can not recognize')
 
-pt = time.time()
-while True:
-    ret, frame = cap.read()
-    cv2.imshow('video', frame)
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-        break
-    
-    ct = time.time()
-    if ct - pt > 1:
-        drinkName = predict(frame)
-        print(drinkName)
-        pt = ct
+a = [predict(img[0]), predict(img[1]), predict(img[2]), predict(img[3])]
+b = [predict(img[4]), predict(img[5]), predict(img[6]), predict(img[7])]
+c = [predict(img[8]), predict(img[9]), predict(img[10]), predict(img[11])]
+d = [predict(img[12]), predict(img[13]), predict(img[14]), predict(img[15])]
 
-cap.release()
-cv2.destroyAllWindows()
+print(a)
+print(b)
+print(c)
+print(d)
